@@ -1,6 +1,7 @@
 package com.example.jwttokenreview.controller;
 
 import com.example.jwttokenreview.domain.dto.UserJoinRequest;
+import com.example.jwttokenreview.domain.dto.UserLoginRequest;
 import com.example.jwttokenreview.domain.entity.User;
 import com.example.jwttokenreview.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,11 @@ public class UserController {
         log.info("request");
         User savedUser = userService.join(request);
         return savedUser.getUsername() + "님 회원가입 성공";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserLoginRequest request) {
+        String token = userService.login(request.getUsername(), request.getPassword());
+        return "로그인 성공\nToken : " + token;
     }
 }

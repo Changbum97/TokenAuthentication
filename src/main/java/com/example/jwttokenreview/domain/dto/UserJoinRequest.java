@@ -2,15 +2,9 @@ package com.example.jwttokenreview.domain.dto;
 
 import com.example.jwttokenreview.domain.UserRole;
 import com.example.jwttokenreview.domain.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Builder
 public class UserJoinRequest {
 
     private String username;
