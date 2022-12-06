@@ -4,6 +4,7 @@ import com.example.jwttokenreview.domain.dto.ReviewCreateRequest;
 import com.example.jwttokenreview.domain.dto.UserJoinRequest;
 import com.example.jwttokenreview.domain.dto.UserLoginRequest;
 import com.example.jwttokenreview.domain.entity.User;
+import com.example.jwttokenreview.service.ReviewService;
 import com.example.jwttokenreview.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final ReviewService reviewService;
 
     @PostMapping("/join")
     public String join(@RequestBody UserJoinRequest request) {
@@ -35,6 +37,7 @@ public class UserController {
 
     @PostMapping("/review")
     public String review(@RequestBody ReviewCreateRequest request, Authentication authentication) {
-        return authentication.getName() + "님이 리뷰를 작성하였습니다,\n내용 : " + request.getContent();
+        String result = reviewService.addReview(authentication.getName(), request.getContent());
+        return result;
     }
 }
